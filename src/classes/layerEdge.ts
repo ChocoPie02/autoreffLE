@@ -57,7 +57,7 @@ export class layerEdgeRefferal {
     const inviteData = {
       invite_code: this.refCode,
     };
-    const response = await this.makeRequest("post", "https://referral.layeredge.io/api/referral/verify-referral-code", {
+    const response = await this.makeRequest("post", "https://referral-api.layeredge.io/api/referral/verify-referral-code", {
       data: inviteData,
     });
   
@@ -75,7 +75,7 @@ export class layerEdgeRefferal {
       walletAddress: this.wallet.address,
     };
   
-    const response = await this.makeRequest("post", `https://referral.layeredge.io/api/referral/register-wallet/${this.refCode}`, {
+    const response = await this.makeRequest("post", `https://referral-api.layeredge.io/api/referral/register-wallet/${this.refCode}`, {
       data: registeData,
     });
   
@@ -100,7 +100,7 @@ export class layerEdgeRefferal {
   
     const response = await this.makeRequest(
       "post",
-      `https://referral.layeredge.io/api/light-node/node-action/${this.wallet.address}/start`,
+      `https://referral-api.layeredge.io/api/light-node/node-action/${this.wallet.address}/start`,
       { data: dataSign }
     );
 
@@ -114,7 +114,7 @@ export class layerEdgeRefferal {
   }
 
   async cekNodeStatus():Promise<boolean> { 
-    const response = await this.makeRequest("get", `https://referral.layeredge.io/api/light-node/node-status/${this.wallet.address}`);
+    const response = await this.makeRequest("get", `https://referral-api.layeredge.io/api/light-node/node-status/${this.wallet.address}`);
     if (response && response.data && response.data.data.startTimestamp !== null) {
       logMessage(null, null, "Node Status Running", "success");
       return true;
