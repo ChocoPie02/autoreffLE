@@ -15,8 +15,24 @@ async function main(): Promise<void> {
   `)
   );
 
-  const refCode = await prompt(chalk.yellow("Enter Referral Code: "));
-  const count = parseInt(await prompt(chalk.yellow("How many do you want? ")));
+   // Ambil argumen dari command line
+  const args = process.argv.slice(2); // Mengambil argumen setelah path script
+  let refCode: string;
+  let count: number;
+  // Cek apakah argumen untuk refCode ada
+  if (args[0]) {
+    refCode = args[0]; // Menggunakan argumen pertama sebagai refCode
+  } else {
+      refCode = await prompt(chalk.yellow("Enter Referral Code: "));
+  }
+  if (args[1]) {
+    count = parseInt(args[1]); // Menggunakan argumen kedua sebagai count
+  } else {
+      count = parseInt(await prompt(chalk.yellow("How many do you want? ")));
+  }
+  // Tampilkan hasil
+  console.log(`Referral Code: ${refCode}`);
+  console.log(`Jumlah: ${count}`);
   const proxiesLoaded = loadProxies();
   if (!proxiesLoaded) {
     console.log(chalk.yellow("No proxy available. Using default IP."));
